@@ -1,7 +1,6 @@
-import autogen
-from autogen import AssistantAgent, UserProxyAgent, config_list_from_json
-import subprocess
+from autogen import AssistantAgent, UserProxyAgent, config_list_from_models
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import subprocess
 import threading
 
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
@@ -26,7 +25,7 @@ server_thread.start()
 server_started_event.wait()
 
 # Configure AutoGen
-config_list = autogen.config_list_from_models(
+config_list = config_list_from_models(
     model_list=["gpt-3.5-turbo"])
 
 llm_config = {
