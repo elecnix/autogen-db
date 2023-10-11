@@ -2,6 +2,7 @@ from autogen import AssistantAgent, UserProxyAgent, config_list_from_models
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import subprocess
 import threading
+import requests
 
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
@@ -31,17 +32,13 @@ config_list = config_list_from_models(
 llm_config = {
     "functions": [
         {
-            "name": "sql",
-            "description": "run SQL and return the execution result.",
+            "name": "query",
+            "description": "query a local HTTP server",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "query": {
-                        "type": "string",
-                        "description": "Valid query to execute.",
-                    }
                 },
-                "required": ["query"],
+                "required": [],
             },
         },
     ],
@@ -56,24 +53,20 @@ assistant = AssistantAgent(
 )
 
 user_proxy = UserProxyAgent(
-    "user_proxy", code_execution_config={"work_dir": "coding", "use_docker": True})
+    "user_proxy", code_execution_config={"work_dir": "coding", "use_docker": True}, human_input_mode="NEVER")
 
 # define functions according to the function desription
 from IPython import get_ipython
-def exec_sql(query):
-    out = subprocess.run(
-                    ["curl", "-S", "http://172.17.0.1:8000"],
-                    capture_output=True,
-                    text=True,
-                )
-    return f"{query}\n\n{out}\n\nRESULTS: 0 rows"
+def exec_query():
+    response = requests.get("http://172.17.0.1:8000")
+    return f"{response.text}"
 
 # register the functions
 user_proxy.register_function(
     function_map={
-        "sql": exec_sql
+        "query": exec_query
     }
 )
 
 user_proxy.initiate_chat(
-    assistant, message="Query the NVDA and TESLA stock price change YTD.")
+    assistant, message="Query the server")
