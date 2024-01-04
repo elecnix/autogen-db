@@ -1,7 +1,8 @@
 repo_name: elecnix/autogen-db
-report_id: 6f14f8fa5b91f8525a23b356d3e1dc95
+report_id: c58a9f569114f355b89a72fe91a6c28d
+version: 0.1
 repo_type: Public
-timestamp: '2023-12-14T09:35:37+00:00'
+timestamp: '2024-01-04T14:59:21+00:00'
 requested_by: elecnix
 provider: github
 branch: master
@@ -15,6 +16,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Version Control System
   image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/elecnix/autogen-db
   detection_source: Repo Metadata
 - name: Jupyter
   description: Multi-language interactive computing environments.
@@ -25,4 +27,5 @@ tools:
   category: Application Utilities
   sub_category: Data Science Notebooks
   image_url: https://img.stackshare.io/service/4190/fGBUdNf__400x400.jpg
+  detection_source_url: https://github.com/elecnix/autogen-db
   detection_source: Repo Metadata
