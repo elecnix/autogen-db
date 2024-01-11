@@ -2,8 +2,8 @@ repo_name: elecnix/autogen-db
 report_id: c58a9f569114f355b89a72fe91a6c28d
 version: 0.1
 repo_type: Public
-timestamp: '2024-01-05T09:21:27+00:00'
-requested_by: elecnix
+timestamp: '2024-01-11T12:21:19+00:00'
+requested_by: stack-file[bot]
 provider: github
 branch: master
 detected_tools_count: 2
